@@ -1,0 +1,110 @@
+
+##### About ####################################################################
+
+Self Tuning Texture Optimization was developed to try to overcome limitations
+in current 2d texture synthesis methods.
+
+For more information on the method, see the paper:
+
+Self Tuning Texture Optimization
+Alexandre Kaspar, Boris Neubert, Dani Lischinski, Mark Pauly, Johannes Kopf
+EUROGRAPHICS 2015
+
+Page:
+http://w-x.ch/pub/self-tuning-texopt
+
+Author:
+Alexandre Kaspar <alexandre.kaspar@alumni.epfl.ch>
+
+##### Dependencies #############################################################
+
+The project builds upon several dependencies that are
+provided in separate folders:
+* EdgeMap: code of P. Dollar and C. Zitnick for ”Structured Forests for Fast Edge Detection", ICCV 2013
+* ImageMelding: base code of Image Melding (which our method started building upon)
+* PatchMatch: our implementation of PatchMatch [Barnes09] with several new parameters and the spatial uniformity term, as well as different voting strategies
+* PiotrToolbox: dependency of EdgeMap
+* vlfeat: feature library which we use for SIFT descriptors / features computation
+
+Depending on your platform, you may need building / installing the dependencies.
+
+##### Links (as of 2015/05/15) #################################################
+
+http://www.vlfeat.org/
+http://research.microsoft.com/en-us/downloads/389109f6-b4e8-404c-84bf-239f7cbf4e3d/default.aspx
+http://vision.ucsd.edu/~pdollar/toolbox/doc/index.html
+http://www.ece.ucsb.edu/~psen/melding
+
+##### Texture Resources ########################################################
+
+All the textures in the paper have been downloaded from CGTextures. These cannot
+be redistributed directly.
+
+Links to these textures follow (as of 2015/05/15):
+http://cgtextures.com/texview.php?id=16379 	(camouflage)
+http://cgtextures.com/texview.php?id=98896	(brick round)
+http://cgtextures.com/texview.php?id=25594 	(hexa)
+http://cgtextures.com/texview.php?id=6524 	(portuguese tiles)
+http://cgtextures.com/texview.php?id=9802 	(floor regular)
+http://cgtextures.com/texview.php?id=23627 	(mixed size)
+http://cgtextures.com/texview.php?id=15776 	(red/gold fabric)
+http://cgtextures.com/texview.php?id=9686 	(white/dark fabric)
+http://cgtextures.com/texview.php?id=38997 	(leaf fabric)
+http://cgtextures.com/texview.php?id=7164 	(concrete floor damaged)
+http://cgtextures.com/texview.php?id=33277 	(concrete floor domaged 2)
+http://cgtextures.com/texview.php?id=29649 	(brick small dirty)
+http://cgtextures.com/texview.php?id=39688 	(brick small pattern)
+http://cgtextures.com/texview.php?id=12899 	(brick old mixed size)
+http://cgtextures.com/texview.php?id=102153 (brick old overgrown)
+http://cgtextures.com/texview.php?id=59242 	(concrete worn paint)
+http://cgtextures.com/texview.php?id=3947	(grunge crackles 1)
+http://cgtextures.com/texview.php?id=52006 	(grunge crackles 2)
+http://cgtextures.com/texview.php?id=4319	(marble green)
+http://cgtextures.com/texview.php?id=49134 	(metal floors painted 1)
+http://cgtextures.com/texview.php?id=3364	(metal floors painted 2)
+http://cgtextures.com/texview.php?id=71118 	(plaster damaged)
+http://cgtextures.com/texview.php?id=8332 	(plastic)
+http://cgtextures.com/texview.php?id=4740 	(plywood)
+http://cgtextures.com/texview.php?id=68885 	(rock smooth erosion 1)
+http://cgtextures.com/texview.php?id=90469	(rock smooth erosion 2)
+http://cgtextures.com/texview.php?id=16102 	(nature leaves dead 1)
+http://cgtextures.com/texview.php?id=14397 	(nature leaves dead 2)
+http://cgtextures.com/texview.php?id=19790	(nature moss 1)
+http://cgtextures.com/texview.php?id=103600	(nature moss 2)
+http://cgtextures.com/texview.php?id=38380 	(gravel cobble)
+http://cgtextures.com/texview.php?id=22614 	(food vegetables)
+http://cgtextures.com/texview.php?id=104523 (food grains)
+
+##### Running our code #########################################################
+
+After having taken care of the dependencies, the rest is happening in SelfTuningTexOpt
+with bash scripts used to do synthesis of several textures in a batch, with various parameters.
+
+You may want to look at the following Matlab script:
+
+SelfTuningTexOpt/demo.m
+
+##### License ##################################################################
+
+Released under the MIT License (see LICENSE).
+
+   Copyright (c) 2015 Alexandre Kaspar <alexandre.kaspar@alumni.epfl.ch>
+ 
+ 
+   Permission is hereby granted, free of charge, to any person obtaining
+   a copy of this software and associated documentation files (the "Software"),
+   to deal in the Software without restriction, including without limitation
+   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+   and/or sell copies of the Software, and to permit persons to whom the
+   Software is furnished to do so, subject to the following conditions:
+ 
+   The above copyright notice and this permission notice shall be included
+   in all copies or substantial portions of the Software.
+ 
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+   IN THE SOFTWARE.

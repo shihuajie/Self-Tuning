@@ -1,0 +1,1 @@
+! extra_channels 2 hist_params default nnf_weights auto smart_init 1 alignment_channels [1,7] nnf_channels [1,2,3,6] vote_channels [1,2,3,6] vote_method histogram vote_method_until 5 vote_method_then default rand_search 10 incomp_search 6 smart_init_margin 25 smart_init_trys 5 high_weight 3 comp_penalty 10

@@ -1,0 +1,18 @@
+
+# Dependencies
+
+* boost 2.49 (potentially works with newer versions, but not tested)
+* MATLAB Mex compiler and libraries (set parameters in mex_build.sh)
+* Bash (to run mex_build.s)
+
+# Compiling the mex files
+
+Simply run mex_build.sh as a bash script
+
+# Author
+
+Alexandre Kaspar <alexandre.kaspar@alumni.epfl.ch>
+
+# License
+
+MIT License, see base README
