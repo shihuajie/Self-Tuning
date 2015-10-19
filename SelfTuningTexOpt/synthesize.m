@@ -34,8 +34,6 @@ function [ res_im, res_nnf ] = synthesize( src_im, org_im, org_mask, options )
 %     fprintf('... sandboxed in %s.\n... resuming at scale %d, iter %d.\n\n', out_directory, k, iter);
         
     %% Image pyramids
-    im_szX = size(org_im, 1);
-    im_szY = size(org_im, 2);
     tx_szX = size(src_im, 1);
     tx_szY = size(src_im, 2);
     % fixed scale
@@ -461,6 +459,7 @@ function [mask] = get_mask(dist, occ, opt)
 end
 %% draw the angle
 function [img] = drawAngleArrow(nnf)
+    angleStep = 6;
     im_nnf = im2double(imread('test_bin.png'));
     img = rgb2lab(im_nnf);
     [w h] = size(nnf);
@@ -468,8 +467,8 @@ function [img] = drawAngleArrow(nnf)
     for x = 1:w
         for y = 1:h
             index = nnf(y,x);
-            img(y,x,2) = (index - 2)*127/2;
-            img(y,x,3) = (index - 2)*127/2;
+            img(y,x,2) = (index - angleStep)*127/angleStep;
+            img(y,x,3) = (index - angleStep)*127/angleStep;
         end
     end
     img = lab2rgb(img);

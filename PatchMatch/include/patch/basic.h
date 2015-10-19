@@ -8,20 +8,36 @@
 #define	BASIC_H
 
 #include "../patch.h" 
-#define MAX_ITERATIONS 1000
-#define ANGLESTEP 2
-// define mirroring : 0 = None, 1 = MirrorX, 2 = MirrorY, 3 = MirrorXY
-#define MIRROR 1
+
+#define ANGLESTEP 6
+#define MIRROR 1           // define mirroring : 0 = None, 1 = MirrorX, 2 = MirrorY, 3 = MirrorXY
+#define MAX_ANGLE (M_PI/2)
+
 namespace pm {
+	struct Prop {
+		static const int angleCount = 2 * ANGLESTEP + 1;
+		float COS[angleCount];
+		float SIN[angleCount];
 
-    static double COS[5] = {0, 0.7071067811, 1, 0.7071067811, 0};
-    static double SIN[5] = {-1, -0.7071067811, 0, 0.7071067811, 1};
-
+		Prop() {
+            SIN[ANGLESTEP] = 0.0f;
+			COS[ANGLESTEP] = 1.0f;
+			for (int i = 1; i <= ANGLESTEP; ++i) {
+				float theta = MAX_ANGLE / ANGLESTEP * i;
+				float c = std::cos(theta);
+                float s = std::sin(theta);
+				SIN[ANGLESTEP + i] = s;
+				SIN[ANGLESTEP - i] = -s;
+				COS[ANGLESTEP + i] = COS[ANGLESTEP - i] = c;
+			}
+		}
+	};
+	static Prop BasicProp;
+    
     template <typename T, int PatchWidth = DEFAULT_PATCH_SIZE >
 	struct BasicPatch : public BasicGrid< BasicPatch<T, PatchWidth> > {
 		/// the width that can be inferred statically
 		static const int staticSize = PatchWidth;
-		
 		/// Location type
 		typedef T Scalar;
 		/// Pixel location within a texture
@@ -75,7 +91,7 @@ namespace pm {
 		}
 
 		template <typename Storage>
-				inline void store(Storage &out, int channels) const {
+		inline void store(Storage &out, int channels) const {
 			switch (channels) {
                 case 5://added by huajie 2015-9-23
 					out[4] = sy;
@@ -138,14 +154,14 @@ namespace pm {
             return true;
         }
 
-		inline static PixLoc pxloc(float x, float y, int angleIndex, float sx, float sy, int dx, int dy) {
+		inline static PixLoc pxloc(float x, float y, int index, float sx, float sy, int dx, int dy) {
 			// translation to the center
 			float px = dx;
 			float py = dy;
 			//float angle = (angleIndex - ANGLESTEP)*M_PI_4;
 			// transformation paramaters
-			float cosA = COS[angleIndex];
-			float sinA = SIN[angleIndex];
+			float cosA = BasicProp.COS[index];
+			float sinA = BasicProp.SIN[index];
 			// actual transformation
 			// 1 =  mirror
             px *= sx;
@@ -184,7 +200,7 @@ namespace pm {
 	 */
 	typedef BasicPatch<int, 0> BasicPatchX;
 	typedef BasicPatch<float, 0> BasicFloatPatchX;
-
+    #define MAX_ITERATIONS 1000
 	template <typename T, int PatchWidth>
 	inline void randomInit(RNG rand, const Image *parent,
 			BasicPatch<T, PatchWidth> &patch) {
@@ -370,4 +386,3 @@ namespace pm {
 }
 
 #endif	/* BASIC_H */
-

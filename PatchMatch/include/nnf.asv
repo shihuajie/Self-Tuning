@@ -277,7 +277,7 @@ namespace pm {
                 {
                     patches[i].sx = 1;
                     patches[i].sy = 1;
-                    patches[i].angleIndex = ANGLESTEP; // added by huajie 2015-9-26
+                    patches[i].angleIndex = 2; // added by huajie 2015-9-26
                 }
 				const Patch &p = patches[i];
 				int x = i % width;
@@ -569,8 +569,7 @@ namespace pm {
 		}
 
 		/// Try a new patch, and update the nnf in case it's better
-		inline bool tryPatch(int y, int x, const Patch &nPatch, float curOcc = -1.0f, float newOcc = -1.0f) {
-            Patch newPatch = nPatch;
+		inline bool tryPatch(int y, int x, const Patch &newPatch, float curOcc = -1.0f, float newOcc = -1.0f) {
 			// require minimum displacement from identity 
 			if(minPatchDisp > 0) {
 				PatchDisplacement d = std::abs(y - newPatch.y) + std::abs(x - newPatch.x); // L1 distance
@@ -595,21 +594,21 @@ namespace pm {
 				return false;
 			}
 // add by huajie 2015-10-18
-//choose the rotation angle of one region
-//             typename SourcePatch::IndexIterator tmpI = srcPatch.begin();
-//             DataType leftTopSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
-//             int i = 9;
-//             while(i--) tmpI++;
-//             DataType rightTopSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
-//             i = 81;
-//             while(i--) tmpI++;
-//             DataType leftbottomSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
-//             i = 9;
-//             while(i--) tmpI++;
-//             DataType rightbottomSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
-//             if( !((int)leftTopSrcPixel[3] == 20 || (int)rightTopSrcPixel[3] == 20 
-//              || (int)leftbottomSrcPixel[3] == 20 || (int)rightbottomSrcPixel[3] == 20) )
-//                 newPatch.angleIndex = ANGLESTEP;
+// 
+				typename SourcePatch::IndexIterator tmpI = srcPatch.begin();
+                DataType leftTopSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
+                int i = 9;
+                while(i--) tmpI++;
+                DataType rightTopSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
+                i = 81;
+                while(i--) tmpI++;
+                DataType leftbottomSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
+                i = 9;
+                while(i--) tmpI++;
+                DataType rightbottomSrcPixel = source->at<DataType>(srcPatch * (*tmpI));
+                if( !((int)leftTopSrcPixel[3] == 20 || (int)rightTopSrcPixel[3] == 20 
+                 || (int)leftbottomSrcPixel[3] == 20 || (int)rightbottomSrcPixel[3] == 20) )
+                    newPatch.index = 6;
 //end
              //soft constraint
 			for (typename SourcePatch::IndexIterator it = srcPatch.begin(); it; ++it) {

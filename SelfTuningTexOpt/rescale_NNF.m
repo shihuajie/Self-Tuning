@@ -43,8 +43,8 @@ output_NNF(:, :, 2) = sY;
 if size(cur_NNF, 3) > 2
     % rotation bound checking
     rt = output_NNF(:,:,3);
-%     rt(rt < options.min_angle) = options.min_angle;
-%     rt(rt > options.max_angle) = options.max_angle;
+%   rt(rt < options.min_angle) = options.min_angle; %% modified by huajie 2015-10-15
+%   rt(rt > options.max_angle) = options.max_angle; %% index no need to check
     % scaling bound checking
     scX = output_NNF(:,:,4);
     scX(abs(scX) < options.min_scale) = options.min_scale * sign(scX(abs(scX) < options.min_scale));
